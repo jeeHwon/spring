@@ -40,13 +40,52 @@ public class MyController {
  		model.addAttribute("list",list);
 		return "/list";
 	}
+	@RequestMapping("/readnum")
+	public String readnum(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		Dao dao = sqlSession.getMapper(Dao.class);
+		dao.readnum(id);
+		return "redirect:/content?id="+id;
+	}
 	@RequestMapping("/content")
 	public String content(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
 		Dao dao = sqlSession.getMapper(Dao.class);
-		dao.readnum(id);
 		Dto dto = dao.content(id);
-		model.addAttribute(dto);
+		model.addAttribute("dto",dto);
+		model.addAttribute("chk",request.getParameter("chk"));
 		return "/content";
+	}
+	@RequestMapping("/update")
+	public String update(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		Dao dao = sqlSession.getMapper(Dao.class);
+		Dto dto = dao.update(id);
+		model.addAttribute("dto",dto);
+		return "/update";
+	}
+	@RequestMapping("/update_ok")
+	public String update_ok(Dto dto) {
+		Dao dao = sqlSession.getMapper(Dao.class);
+		Integer num = dao.pwd_check(dto.getId()+"", dto.getPwd());
+		if(num==1) {
+			dao.update_ok(dto);
+			return "redirect:/content?id="+dto.getId();
+		}else {
+			return "redirect:/content?id="+dto.getId()+"&chk=1";
+		}
+	}
+	@RequestMapping("/delete")
+	public String delete(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		Dao dao = sqlSession.getMapper(Dao.class);
+		Integer num = dao.pwd_check(id, pwd);
+		if(num == 1) {
+			dao.delete(id);
+			return "redirect:/list";
+		} else {
+			return "redirect:/content?id="+id+"&chk=1";
+		}
 	}
 }

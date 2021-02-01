@@ -10,4 +10,8 @@ public interface Dao {
 	public ArrayList<Dto> list();
 	public Dto content(String id);
 	public void readnum(String id);
+	public Dto update(String id);
+	public void update_ok(Dto dto);
+	public void delete(String id);
+	public Integer pwd_check(String id, String pwd);
 }

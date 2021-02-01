@@ -18,7 +18,7 @@
 	<c:forEach items="${list}" var="dto">
 	<tr>
 		<td>${dto.name}</td>
-		<td><a href="content?id=${dto.id}">${dto.title}</a></td>
+		<td><a href="readnum?id=${dto.id}">${dto.title}</a></td>
 		<td>${dto.readnum}</td>
 		<td>${dto.writeday}</td>
 	</tr>
