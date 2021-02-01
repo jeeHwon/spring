@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.batis.dao.Dao">
+	<!-- 쿼리작성 --> <!-- #은 ''대신 $는 ''필요없는 숫자 -->
+	<insert id="write_ok" parameterType="kr.co.batis.dto.Dto">
+		insert into board(name,title,content,pwd,writeday) 
+		values (#{name}, #{title}, #{content}, #{pwd}, now())
+	</insert>
+	<select id="list" resultType="kr.co.batis.dto.Dto">
+		select * from board order by id desc
+	</select>
+	<select id="content" resultType="kr.co.batis.dto.Dto">
+		select * from board where id = #{param1} 
+	</select>
+	<update id="readnum">
+		update board set readnum = readnum + 1 where id = #{param1}
+	</update>
+</mapper>
