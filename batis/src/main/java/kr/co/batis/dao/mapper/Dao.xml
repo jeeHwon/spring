@@ -10,8 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{name}, #{title}, #{content}, #{pwd}, now())
 	</insert>
 	<select id="list" resultType="kr.co.batis.dto.Dto">
-		select * from board order by id desc
+		<!-- 모든 내용을 다 읽어오는 쿼리 -->
+		<!-- select * from board order by id desc-->
+		select * from board order by id desc limit #{param1}, 10;
 	</select>
+	
 	<select id="content" resultType="kr.co.batis.dto.Dto">
 		select * from board where id = #{param1} 
 	</select>
@@ -30,4 +33,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pwd_check" resultType="Integer">
 		select count(*) from board where id=#{param1} and pwd=#{param2}
 	</select>
+	
+	<!-- 로그인부분 -->
+	<select id="login_ok" parameterType="kr.co.batis.dto.MemberDto" 
+		resultType="kr.co.batis.dto.MemberDto">
+		select * from member where userid=#{userid} and pwd=#{pwd}	
+	</select>
+	
+	<!-- 페이징처리 -->
+	<select id="getCnt" resultType="Integer">
+		select count(*) as cnt from board
+	</select>
+	
 </mapper>

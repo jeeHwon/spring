@@ -31,13 +31,42 @@ public class MyController {
 	public String write_ok(Dto dto) {
 		Dao dao = sqlSession.getMapper(Dao.class);
 		dao.write_ok(dto);
+		/*페이징 테스트용 코드
+		String name = dto.getName();
+		String title = dto.getTitle();
+		for(int i=1; i<=2578; i++) {
+			dto.setName(name+i);
+			dto.setTitle(title+i);
+			dao.write_ok(dto);
+		}*/
 		return "redirect:/list";
 	}
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(Model model, HttpServletRequest request) {
 		Dao dao = sqlSession.getMapper(Dao.class);
-		ArrayList<Dto> list = dao.list();
+		int page, index;
+		if(request.getParameter("page")==null) {
+			page = 1;
+			index = 0;
+		} else {
+			page = Integer.parseInt(request.getParameter("page"));
+			index = (page-1)*10;
+		}
+		int pstart = (int)(Math.ceil(page/10.0)-1)*10+1;
+		int pend = pstart + 9;
+		ArrayList<Dto> list = dao.list(index);
+		int total_cnt = dao.getCnt();
+		int page_cnt = (int)Math.ceil(total_cnt*0.1);
+		if(page_cnt < pend){
+			pend = page_cnt;
+		}
  		model.addAttribute("list",list);
+ 		model.addAttribute("pstart",pstart);
+ 		model.addAttribute("pend",pend);
+ 		model.addAttribute("total_cnt",total_cnt);
+ 		model.addAttribute("page_cnt",page_cnt);
+ 		model.addAttribute("index",index);
+ 		model.addAttribute("page",page);
 		return "/list";
 	}
 	@RequestMapping("/readnum")
