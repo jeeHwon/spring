@@ -34,4 +34,8 @@ public class AjaxController {
 		System.out.print(total);
 		out.print(total);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/jeeHwon/spring.git
