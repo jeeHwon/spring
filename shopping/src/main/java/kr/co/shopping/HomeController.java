@@ -1,4 +1,4 @@
-package kr.co.basic;
+package kr.co.shopping;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -33,23 +33,19 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/main";
+		return "home";
 	}
-	
 	@RequestMapping("/main")
 	public String main() {
-		
-		return "/main";
+		return "/main/index";
 	}
-	@RequestMapping("/test")
-	public String test() {
-		
-		return "/test";
+	@RequestMapping("/main/index")
+	public String index() {
+		return "/main/index";
 	}
-	@RequestMapping("/imsi")
-	public String imsi() {
-		
-		return "/imsi";
+	@RequestMapping("/main/menu")
+	public String menu() {
+		return "/main/menu";
 	}
 	
 }
