@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.batis.dao.Dao;
+import kr.co.batis.dao.MemberDao;
 import kr.co.batis.dto.Dto;
 
 @Controller
@@ -29,7 +29,7 @@ public class MyController {
 	}
 	@RequestMapping("/write_ok")
 	public String write_ok(Dto dto) {
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		dao.write_ok(dto);
 		/*페이징 테스트용 코드
 		String name = dto.getName();
@@ -43,7 +43,7 @@ public class MyController {
 	}
 	@RequestMapping("/list")
 	public String list(Model model, HttpServletRequest request) {
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		int page, index;
 		if(request.getParameter("page")==null) {
 			page = 1;
@@ -72,14 +72,14 @@ public class MyController {
 	@RequestMapping("/readnum")
 	public String readnum(HttpServletRequest request) {
 		String id = request.getParameter("id");
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		dao.readnum(id);
 		return "redirect:/content?id="+id;
 	}
 	@RequestMapping("/content")
 	public String content(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		Dto dto = dao.content(id);
 		model.addAttribute("dto",dto);
 		model.addAttribute("chk",request.getParameter("chk"));
@@ -88,14 +88,14 @@ public class MyController {
 	@RequestMapping("/update")
 	public String update(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		Dto dto = dao.update(id);
 		model.addAttribute("dto",dto);
 		return "/update";
 	}
 	@RequestMapping("/update_ok")
 	public String update_ok(Dto dto) {
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		Integer num = dao.pwd_check(dto.getId()+"", dto.getPwd());
 		if(num==1) {
 			dao.update_ok(dto);
@@ -108,7 +108,7 @@ public class MyController {
 	public String delete(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		Integer num = dao.pwd_check(id, pwd);
 		if(num == 1) {
 			dao.delete(id);

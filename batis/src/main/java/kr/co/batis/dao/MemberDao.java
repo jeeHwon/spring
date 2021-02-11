@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import kr.co.batis.dto.Dto;
 import kr.co.batis.dto.MemberDto;
 
-public interface Dao {
+public interface MemberDao {
 	//method 정의
 	public void write_ok(Dto dto);	//추상method
 	public ArrayList<Dto> list(int index);

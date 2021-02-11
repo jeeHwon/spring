@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.batis.dao.Dao;
+import kr.co.batis.dao.MemberDao;
 import kr.co.batis.dto.MemberDto;
 
 @Controller
@@ -32,7 +32,7 @@ public class LoginController {
 		//사용자가 입력한 아이디, 비밀번호
 		
 		//데이터베이스를 대상으로 체크 => 세션변수 생성(주로 아이디, 이름)
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		MemberDto mdto2 = dao.login_ok(mdto);
 		
 		if(mdto2 == null) {
