@@ -3,10 +3,12 @@ package kr.co.shopping.controller;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.shopping.dao.MemberDao;
@@ -49,5 +51,48 @@ public class MemberController {
 		mdao.member_ok(mdto);
 		return "redirect:/main/index";
 	}
+	@RequestMapping("login/login")
+	public String login(HttpServletRequest request, Model model) {
+		model.addAttribute("chk", request.getParameter("chk"));
+		return "/login/login";
+	}
+	@RequestMapping("login/login_ok")
+	public String login_ok(HttpServletRequest request, HttpSession session) {
+		String userid = request.getParameter("userid");
+		String pwd = request.getParameter("pwd");
+		MemberDao mdao = sqlSession.getMapper(MemberDao.class);
+		MemberDto mdto = mdao.get_member(userid, pwd);
+		if(mdto != null) {
+			session.setAttribute("userid", mdto.getUserid());
+			session.setAttribute("name", mdto.getName());
+			return "redirect:/main/index";
+		} else {
+			return "redirect:/login/login?chk=1";
+		}
+	}
+	@RequestMapping("login/userid_search")
+	public String userid_search() {
+		return "login/userid_search";
+	}
+	@RequestMapping("/login/userid_view")
+	public String userid_search_ok(HttpServletRequest request, Model model) {
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		MemberDao mdao = sqlSession.getMapper(MemberDao.class);
+		String userid = mdao.get_userid(name, email);
+		if(userid == null) {
+			model.addAttribute("chk",2);
+		} else {
+			int n = userid.length() -3;
+			String star ="";
+			for(int i=1; i<=n; i++) {
+				star = star + "*";
+			}
+			model.addAttribute("chk",1);
+			model.addAttribute("userid",userid);
+		}
+		return "/login/userid_view";
+	}
+
 	
 }

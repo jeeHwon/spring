@@ -4,6 +4,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybats-3-mapper.dtd">
 
 <mapper namespace="kr.co.shopping.dao.MemberDao">
+	<select id="get_member" resultType="kr.co.shopping.dto.MemberDto">
+		select name, userid from member where userid=#{param1} and pwd=#{param2}	
+	</select>
+	
 	<select id="get_userid_chk" resultType="Integer">
 		select count(*) from member where userid=#{param1}
 	</select>
@@ -17,4 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{userid},#{pwd},#{name},#{email},#{phone},#{zip},#{juso},#{juso_etc},#{sung},#{birth},now())
 	</insert>
 	
+	<select id="get_userid" resultType="String">
+		select userid from member where name=#{param1} and email=#{param2}
+	</select>
 </mapper>
