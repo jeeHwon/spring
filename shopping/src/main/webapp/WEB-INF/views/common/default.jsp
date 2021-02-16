@@ -10,6 +10,19 @@
 <link rel="stylesheet" href="../resources/main.css">
 <script src="../resources/main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+window.onload=function(){
+	var ck = 0
+	setInterval(function(){
+		if(ck%2==0){
+			document.getElementById("first_in").innerHTML="서울 경기 인천 &nbsp;<b style='color:purple'>샛별배송</b>"
+		} else{
+			document.getElementById("first_in").innerHTML="수도권이외지역 &nbsp;<b style='color:purple'>택배배송</b>"
+		}
+		ck++
+	},2000)
+}
+</script>
 </head>
 <decorator:head/>
 <body>
@@ -20,7 +33,7 @@
 		</div>
 	</div>
 	<div class="second">
-		<div class="left"><span> 수도권 이외지역 : 택배배송</span></div>
+		<div class="left"><span id="first_in"> 수도권 이외지역 : 택배배송</span></div>
 		<div class="right">
 			<ul>
 				<c:if test="${userid != null }">
