@@ -8,15 +8,32 @@
 		chk.send()
 		chk.onreadystatechange=function(){
 			if(chk.readyState==4){
-				alert(decodeURI(chk.responseText).replace(/%2F/g,"/"))
+				var result = decodeURI(chk.responseText).replace(/%2F/g,"/")
+				var menu = result.split(",")
+				var jnum = Math.floor(menu.length/2)	
+				// 중분류 select의 크기를 먼저 지정
+				document.pkc.jung.options.length=jnum
+				for(i=0; i<jnum; i++){ // i의 값은 option 태그의 index
+					document.pkc.jung.options[i].value=menu[i]
+					document.pkc.jung.options[i].text=menu[jnum+i]
+				}
+				
 			}
 		}
+	}
+	function check(my){
+		// 대분류, 중분류를 이용하여 상품코드 만들기
+		var dae = my.dae.value
+		var jung = my.jung.value
+		my.pcode.value = "p"+dae+jung
 	}
 
 </script>
 <div id="psection">
 	<!-- 상품등록 페이지 -->
+	<form name="pkc" method="post" action="pwrite_ok" onsubmit="return check(this)" enctype="multipart/form-data">
 	<table width="600" align="center">
+	<input type="hidden" name="pcode">
 	<tr>
 		<td>상품코드</td>
 		<td>
@@ -107,6 +124,6 @@
 			<input type="submit" value="상품등록하기">
 		</td>
 	</tr>
-	
 	</table>
+	</form>
 </div>

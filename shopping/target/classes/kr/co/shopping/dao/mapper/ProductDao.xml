@@ -10,4 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="get_jung" resultType="kr.co.shopping.dto.JungDto">
 		select * from jung where daecode=#{param1} order by code asc
 	</select>
+	<select id="get_maxpcode" resultType="Integer">
+		select ifnull(right(max(pcode),4),0) as num from product where pcode like concat('%',#{param1},'%')
+	</select>
+	<insert id="pwrite_ok" parameterType="kr.co.shopping.dto.ProductDto">
+		insert into product(mimg,title,subtitle,price,pdan,pwe,bgubun,made,pal,gihan,
+		su,pcon,pimg,pinfo,halin,writeday,pcode)
+		values(#{mimg},#{title},#{subtitle},#{price},#{pdan},#{pwe},#{bgubun},#{made},
+		#{pal},#{gihan},#{su},#{pcon},#{pimg},#{pinfo},#{halin},writeday,#{pcode})
+	</insert>
 </mapper>

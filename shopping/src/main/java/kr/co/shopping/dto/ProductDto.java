@@ -3,7 +3,7 @@ package kr.co.shopping.dto;
 public class ProductDto {
 	private int id, price, bgubun, gihan, su, halin;
 	private String mimg, title, subtitle, pdan, pwe;
-	private String made, pal, pcon, pimg, pinfo, writeday;
+	private String made, pal, pcon, pimg, pinfo, pcode, writeday;
 	public int getId() {
 		return id;
 	}
@@ -105,5 +105,11 @@ public class ProductDto {
 	}
 	public void setWriteday(String writeday) {
 		this.writeday = writeday;
+	}
+	public String getPcode() {
+		return pcode;
+	}
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
 }
