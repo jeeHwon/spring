@@ -11,6 +11,19 @@ function first_hide(){
 	//document.getElementsByClassName("first")[0].style.display="none"
 	$(".first").slideUp(1000)
 }
+// 전체카테고리 부분
+function view_main(){
+	document.getElementById("main_submenu").style.visibility="visible"
+}
+function hide_main(){
+	document.getElementById("main_submenu").style.visibility="hidden"
+}
+function view_inner(n){
+	document.getElementsByClassName("inner_menu")[n].style.visibility="visible"
+}
+function hide_inner(n){
+	document.getElementsByClassName("inner_menu")[n].style.visibility="hidden"
+}
 function userid_dupcheck(form){
 	var chk = new XMLHttpRequest()
 	chk.open("get","userid_dupcheck?userid="+form.userid.value)

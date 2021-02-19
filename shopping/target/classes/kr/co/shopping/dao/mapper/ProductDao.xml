@@ -19,4 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{mimg},#{title},#{subtitle},#{price},#{pdan},#{pwe},#{bgubun},#{made},
 		#{pal},#{gihan},#{su},#{pcon},#{pimg},#{pinfo},#{halin},writeday,#{pcode})
 	</insert>
+	<select id="get_pro_list" resultType="kr.co.shopping.dto.ProductDto">
+		select * from product where pcode like concat(#{param1},'%') order by id desc
+	</select>
 </mapper>

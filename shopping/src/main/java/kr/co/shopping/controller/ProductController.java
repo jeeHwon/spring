@@ -90,6 +90,15 @@ public class ProductController {
 		
 		return "redirect:/product/pwrite";
 	}
+	@RequestMapping("/product/pro_list")
+	public String pro_list(Model model, HttpServletRequest request) {
+		ProductDao pdao = sqlSession.getMapper(ProductDao.class);
+		String pcode = request.getParameter("pcode");
+		ArrayList<ProductDto> list = pdao.get_pro_list(pcode);
+		model.addAttribute("list",list);
+		System.out.println(list.size());
+		return "/product/pro_list";
+	}
 	
 	
 
