@@ -31,7 +31,7 @@
 <body>
 	<div class="first">
 		<div class="container">
-			<span class="left">지금 가입 바로 가입하세요 </span> <span class="right"><span
+			<span class="left">지금 가입 바로 가입하세요 </span> <span class="right" id="span_right"><span
 				onclick="first_hide()">X</span></span>
 		</div>
 	</div>
@@ -67,29 +67,31 @@
 		</p>
 	</div>
 	<div class="fourth">
-		<ul>
+		<ul style="height:50px;">
 			<li id="main_menu" onmouseover="view_main()" onmouseout="hide_main()">전체카테고리
 				<ul id="main_submenu">
-					<li class="main_inner" onmouseover="view_inner(0)" onmouseout="hide_inner(0)">채소
+					<li class="main_inner" onmouseover="view_inner(0)" onmouseout="hide_inner(0)">
+						<a href="../product/pro_list?pcode=p01">채소</a>
 						<ul class="inner_menu">
-							<li>고구마/감자/당근</li>
-							<li>시금치/쌈채소/나물</li>
-							<li>브로콜리/파프리카/양배추</li>
-							<li>양파/대파/마늘/배추</li>
-							<li>오이/호박/고추</li>
-							<li>냉동/이색/간편채소</li>
-							<li>콩나물/버섯</li>
+							<li><a href="../product/pro_list?pcode=p0101">고구마/감자/당근</a></li>
+							<li><a href="../product/pro_list?pcode=p0102">시금치/쌈채소/나물</a></li>
+							<li><a href="../product/pro_list?pcode=p0103">브로콜리/파프리카/양배추</a></li>
+							<li><a href="../product/pro_list?pcode=p0104">양파/대파/마늘/배추</a></li>
+							<li><a href="../product/pro_list?pcode=p0105">오이/호박/고추</a></li>
+							<li><a href="../product/pro_list?pcode=p0106">냉동/이색/간편채소</a></li>
+							<li><a href="../product/pro_list?pcode=p0107">콩나물/버섯</a></li>
 						</ul>
 					</li>
-					<li class="main_inner" onmouseover="view_inner(1)" onmouseout="hide_inner(1)">과일/견과/쌀
+					<li class="main_inner" onmouseover="view_inner(1)" onmouseout="hide_inner(1)">
+					<a href="../product/pro_list?pcode=p02">과일/견과/쌀</a>
 						<ul class="inner_menu">
-							<li>제철과일</li>
-							<li>국산과일</li>
-							<li>수입과일</li>
-							<li>간편과일</li>
-							<li>냉동/건과일</li>
-							<li>견과류</li>
-							<li>쌀/잡곡</li>
+							<li><a href="../product/pro_list?pcode=p0201">제철과일</a></li>
+							<li><a href="../product/pro_list?pcode=p0202">국산과일</a></li>
+							<li><a href="../product/pro_list?pcode=p0203">수입과일</a></li>
+							<li><a href="../product/pro_list?pcode=p0204">간편과일</a></li>
+							<li><a href="../product/pro_list?pcode=p0205">냉동/건과일</a></li>
+							<li><a href="../product/pro_list?pcode=p0206">견과류</a></li>
+							<li><a href="../product/pro_list?pcode=p0207">쌀/잡곡</a></li>
 						</ul>
 					</li>
 					<li>수산/해산/건어물</li>

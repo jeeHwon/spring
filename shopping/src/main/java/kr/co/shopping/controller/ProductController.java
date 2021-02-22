@@ -96,8 +96,15 @@ public class ProductController {
 		String pcode = request.getParameter("pcode");
 		ArrayList<ProductDto> list = pdao.get_pro_list(pcode);
 		model.addAttribute("list",list);
-		System.out.println(list.size());
 		return "/product/pro_list";
+	}
+	@RequestMapping("/product/pro_content")
+	public String pro_content(HttpServletRequest request, Model model) {
+		String pcode = request.getParameter("pcode");
+		ProductDao pdao = sqlSession.getMapper(ProductDao.class);
+		ProductDto pdto = pdao.get_pro_content(pcode);
+		model.addAttribute("pdto", pdto);
+		return "/product/pro_content";
 	}
 	
 	

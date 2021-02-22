@@ -22,4 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="get_pro_list" resultType="kr.co.shopping.dto.ProductDto">
 		select * from product where pcode like concat(#{param1},'%') order by id desc
 	</select>
+	<select id="get_pro_content" resultType="kr.co.shopping.dto.ProductDto">
+		select * from product where pcode = #{param1}
+	</select>
 </mapper>
