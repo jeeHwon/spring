@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
 /*영양성분 content*/
 function fetchPage(name){
@@ -11,8 +16,18 @@ function fetchPage(name){
 	      })
 	    });
 	  }
+	  
 
   </script>
+    <!-- Bootstrap -->
+    <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="<%=request.getContextPath()%>/resources/bootstrap/build/css/custom.min.css" rel="stylesheet">
 <style>
 table {
     width: 100%;
@@ -26,7 +41,7 @@ table {
 .first {
     
     float: left;
-    width:30%;
+    width:40%;
     box-sizing: border-box;
 }
 
@@ -34,7 +49,7 @@ table {
     border: 1px solid black;
     float: left;
     margin-left: 5%;
-    width:30%;
+    width:40%;
     box-sizing: border-box;
 }
 </style>
@@ -99,10 +114,27 @@ table {
 		</nav>
 	</div>
  </div>
-
- 	
-	<div class="second">
-	<nutrition>
+<div class="second">
+	<nutrition> 
+	 <!-- 성분표 나옴 -->
 	</nutrition>
-	</div>
 </div>
+
+</div>
+
+
+	<!-- jQuery -->
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/nprogress/nprogress.js"></script>
+    <!-- ECharts -->
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/echarts/dist/echarts.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/echarts/map/js/world.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/build/js/custom.min.js"></script>
+	
