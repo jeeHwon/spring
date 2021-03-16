@@ -35,17 +35,14 @@
     <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-	
     <!-- bootstrap-progressbar -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/build/css/custom.min.css" rel="stylesheet">
-    
     <!-- 파비콘 추가 -->
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/img/logo_con2.ico">
   </head>
@@ -106,7 +103,7 @@
                   </li>
                   <li><a><i class="fa fa-desktop"></i> 레시피 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">레시피 보기</a></li>
+                      <li><a href="/food/recipe_info/recipe_info_list">레시피 보기</a></li>
                       <li><a href="<%=request.getContextPath()%>/nutrition/list">음식 및 식품 영양성분보기</a></li>
                     </ul>
                   </li>  
@@ -148,6 +145,12 @@
                       <li><a href="/food/admin/notice_write">공지사항 입력</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-desktop"></i>자주 묻는 질문<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/food/admin/fnq_list">자주 묻는 질문 보기</a></li>
+                      <li><a href="/food/admin/fnq_write">자주 묻는 질문 입력</a></li>
+                    </ul>
+                  </li> 
                   <li><a><i class="fa fa-user"></i>회원 관리<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/food/admin/member_list">회원 리스트</a></li>
@@ -230,6 +233,14 @@
         </div>
 <decorator:body/>
 <!-- 모든 문서의 내용이 전부 여기 나옵니다.. -->
+<footer>
+<div class="pull-right" align="center">
+DietMight made by-Park junwu,Lee jeongsam,Lee jaeguen,Yoo jaeseok,Ji seungwon,Choi hongjun 
+<p/>Gentelella-Bootstrap
+<a href="https://colorlib.com"></a>
+</div>
+<div class="clearfix"></div>
+</footer>
     <!-- jQuery -->
     <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/jquery/dist/jquery.min.js"></script>
     <script src="https:/code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

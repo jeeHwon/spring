@@ -12,11 +12,10 @@
 function fetchPage(name){
 	    fetch(name).then(function(response){
 	      response.text().then(function(text){
-	        document.querySelector('nutrition').innerHTML = text;
+	        document.querySelector('recipe').innerHTML = text;
 	      })
 	    });
 	  }
-	  
 
   </script>
     <!-- Bootstrap -->
@@ -39,92 +38,98 @@ table {
     padding: 10px;
   }
 .first {
-    
     float: left;
     width:40%;
     box-sizing: border-box;
 }
 
 .second{
-    border: 1px solid black;
     float: left;
     margin-left: 5%;
     width:40%;
     box-sizing: border-box;
 }
 </style>
-<div class="right_col"  align="center">
-<h1 align="center">식품 영양 성분</h1>
-
+<div id="section" class="right_col">
+	<h1 align="left">레시피 전체 리스트</h1>
 <div class="first">
 <div id="search" align="right">
-  <form method="post" action="list">
-  <input type="text" value="${sword}" name="sword" placeholder="식품명" >
-  <button type="submit" id="button">검색</button>
+  <form class="form-inline" method="post" action="recipe_info_list">
+  <input type="text" class="form-control" value="${recipe_word}" name="recipe_word" placeholder="레시피검색" aria-label="food_name" aria-describedby="button">
+  <button class="btn btn-primary" type="submit" id="button">검색</button>
   </form>
 </div>
-<table  boarder="1">
- <tr align="center">
-    <td>음식이름</td>
- </tr>
-
- <c:forEach items="${list }" var="ndto">
-  <tr align="center">
-     <td>
-     <a onmouseover="fetchPage('n_view?food_code=${ndto.food_code}');">${ndto.food_name}</a>
-     </td>
-  </tr>
- </c:forEach>
-<tr>
-  <td colspan="3" align="center"><a href="write">글쓰기</a></td>
- </tr>
- </table>
- <div id="page_nav" align="center">
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>레시피 번호</th>
+				<th>레시피 이름</th>
+			</tr>
+			<c:forEach var="dto" items="${list}">
+				<tr>
+					<td>${dto.recipe_code }</td>
+					<td>
+					<a onmouseover="fetchPage('recipe_info_content2?recipe_name=${dto.recipe_name}');">${dto.recipe_name}</a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<div id="page_nav">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
 				<c:if test="${page ==1 }">
 					<li class="page-item disabled"><a class="page-link" href="#"
-						tabindex="-1" aria-disabled="true"> <- </a></li>
+						tabindex="-1" aria-disabled="true">이전</a></li>
 				</c:if>
 				<c:if test="${page !=1 }">
 					<li class="page-item"><a class="page-link"
-						href="/food/nutrition/list?page=${page-1}&sword=${sword}"> <- </a></li>
+						href="/food/recipe_info/recipe_info_list?page=${page-1}&recipe_word=${recipe_word}">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pstart }" end="${pend }">
 					<c:if test="${i!=page}">
 						<li class="page-item"><a class="page-link"
-							href="/food/nutrition/list?page=${i}&sword=${sword}">${i}</a></li>
+							href="/food/recipe_info/recipe_info_list?page=${i}&recipe_word=${recipe_word}">${i}</a></li>
 					</c:if>
 					<c:if test="${i==page}">
 						<li class="page-item active"><a class="page-link"
-							href="/food/nutrition/list?page=${i}&sword=${sword}">${i}</a></li>
+							href="/food/recipe_info/recipe_info_list?page=${i}&recipe_word=${recipe_word}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 
 				<c:if test="${page != page_cnt}">
 					<li class="page-item"><a class="page-link"
-						href="/food/nutrition/list?page=${page+1}&sword=${sword}">-></a></li>
+						href="/food/recipe_info/recipe_info_list?page=${page+1}&recipe_word=${recipe_word}">다음</a></li>
 				</c:if>
 				<c:if test="${page == page_cnt}">
 					<li class="page-item disabled"><a class="page-link" href="#"
-						tabindex="-1" aria-disabled="true">-></a></li>
+						tabindex="-1" aria-disabled="true">다음</a></li>
 				</c:if>
 
 			</ul>
 		</nav>
 	</div>
- </div>
+<style>
+#page_nav {
+	width: 500px;
+	margin: 0 auto;
+}
+#search
+{
+	float:right;
+}
+</style>
+</div>
 <div class="second">
-	<nutrition> 
+	<recipe> 
 	 <!-- 성분표 나옴 -->
-	</nutrition>
+	</recipe>
 </div>
 
 </div>
 
 
 	<!-- jQuery -->
-    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/jquery/dist/jquery.min.js"></script> 
     <!-- Bootstrap -->
     <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -136,5 +141,5 @@ table {
     <script src="<%=request.getContextPath()%>/resources/bootstrap/vendors/echarts/map/js/world.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <%-- <script src="<%=request.getContextPath()%>/resources/bootstrap/build/js/custom.min.js"></script> --%>
-	
+    <%-- <script src="<%=request.getContextPath()%>/resources/bootstrap/build/js/custom.min.js"></script>
+	 --%>

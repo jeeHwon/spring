@@ -10,12 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.food.dao.FnqDao;
 import kr.co.food.dao.IndexDao;
 import kr.co.food.dao.NoticeDao;
+import kr.co.food.dao.NutrionDao;
 import kr.co.food.dao.PriceDao;
 import kr.co.food.dao.TrendDao;
 import kr.co.food.dao.WeekDao;
+import kr.co.food.dto.FnqDto;
 import kr.co.food.dto.NoticeDto;
+import kr.co.food.dto.NutrionDto;
 import kr.co.food.dto.PriceDto;
 import kr.co.food.dto.TrendDto;
 import kr.co.food.dto.WeekDto;
@@ -44,16 +48,28 @@ public class IndexController {
 		int recipe=idao.getRecipeCnt();
 		int trend=idao.getTrendCnt();
 		int price=idao.getPriceCnt();
+		int diet=idao.getDietCnt();
 		
 		model.addAttribute("food", food);
 		model.addAttribute("user", user);
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("trend", trend);
 		model.addAttribute("price", price);
+		model.addAttribute("diet", diet);
 		/*공지사항*/
 		NoticeDao ndao = sqlSession.getMapper(NoticeDao.class);
 		ArrayList<NoticeDto> inlist = ndao.inlist();
 		model.addAttribute("inlist", inlist);
+		
+		/*tolltip 사용하려고 만듦*/
+		NutrionDao fcdao = sqlSession.getMapper(NutrionDao.class);
+		ArrayList<NutrionDto> fclist = fcdao.fclist();
+		model.addAttribute("fclist", fclist);
+		
+		/*자주 묻는 질문*/
+		FnqDao fdao = sqlSession.getMapper(FnqDao.class);
+		ArrayList<FnqDto> flist = fdao.getList5();
+		model.addAttribute("flist", flist);
 		
 		/*트렌드*/
 		TrendDao dao = sqlSession.getMapper(TrendDao.class);
@@ -74,8 +90,11 @@ public class IndexController {
 		
 		/*가격정보*/
 		PriceDao pdao=sqlSession.getMapper(PriceDao.class);
-		ArrayList<PriceDto> plist=pdao.getTop5();
+		ArrayList<PriceDto> plist=pdao.getBottom5();
 		model.addAttribute("plist", plist);
+		
+		ArrayList<PriceDto> plist2=pdao.getTop5();
+		model.addAttribute("plist2",plist2);
 		
 		ArrayList foodlist=new ArrayList();
 		for(int i=0;i<plist.size();i++) {

@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.food.dao.Predict_priceDao;
 import kr.co.food.dao.PriceDao;
+import kr.co.food.dto.Predict_priceDto;
 import kr.co.food.dto.PriceDto;
 
 
@@ -24,8 +26,11 @@ public class PriceController {
 	public String price_chart(Model model)
 	{
 		PriceDao pdao=sqlSession.getMapper(PriceDao.class);
-		ArrayList<PriceDto> plist=pdao.getTop5();
+		ArrayList<PriceDto> plist=pdao.getBottom5();
 		model.addAttribute("plist", plist);
+		
+		ArrayList<PriceDto> plist2=pdao.getTop5();
+		model.addAttribute("plist2",plist2);
 		
 		ArrayList foodlist=new ArrayList();
 		for(int i=0;i<plist.size();i++) {
@@ -89,5 +94,18 @@ public class PriceController {
 		model.addAttribute("page_cnt",page_cnt);
 		model.addAttribute("sword",sword);
 		return "/price/price_list";
+	}
+	@RequestMapping("/price/one_price")
+	public String one_price(Model model,HttpServletRequest request)
+	{
+		String food_name=request.getParameter("food_name");
+		PriceDao pdao=sqlSession.getMapper(PriceDao.class);
+		ArrayList<PriceDto> food=pdao.getPrice(food_name);
+		model.addAttribute("food",food);
+		
+		Predict_priceDao ppdao=sqlSession.getMapper(Predict_priceDao.class);
+		ArrayList<Predict_priceDto> f2=ppdao.getPredictPrice(food_name);
+		model.addAttribute("f2",f2);
+		return "/price/one_price";
 	}
 }
